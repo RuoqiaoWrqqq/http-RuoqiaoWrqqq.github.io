@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#1f2937">
+  <meta name="description" content="Ruoqiao Wang is a Ph.D. candidate in Biomedical Genetics at the University of Rochester, a computational biologist and machine learning researcher interested in building interpretable AI models for biology.">
+  <title>Ruoqiao Wang</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --base-100: #ffffff;
+      --base-200: #f5f5f5;
+      --base-300: #e7e5e4;
+      --base-content: #000000;
+      --primary: #292524;
+      --muted: #57534e;
+      --blue: #3b82f6;
+      --yellow-600: #ca8a04;
+      --red-600: #dc2626;
+      --amber-soft: #fff7df;
+      --blue-soft: #eef5ff;
+      --green-soft: #eefbf5;
+      --red-soft: #fff1f1;
+      --ring: rgba(231, 229, 228, 0.6);
+      --shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 18px 45px rgba(41, 37, 36, 0.08);
+      --radius-box: 0.25rem;
+      --radius-btn: 0.125rem;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    body {
+      margin: 0;
+      background: var(--base-100);
+      color: var(--base-content);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .drawer {
+      display: grid;
+      min-height: 100vh;
+      grid-template-columns: 20rem minmax(0, 1fr);
+      background: var(--base-100);
+    }
+
+    .drawer-toggle {
+      display: none;
+    }
+
+    .drawer-content {
+      grid-column: 2;
+      grid-row: 1;
+      min-width: 0;
+      background: var(--base-100);
+    }
+
+    .mobile-bar {
+      display: none;
+    }
+
+    .drawer-side {
+      grid-column: 1;
+      grid-row: 1;
+      min-height: 100vh;
+      background: var(--base-200);
+      border-right: 1px solid var(--base-300);
+    }
+
+    .drawer-overlay {
+      display: none;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+      padding: 1.25rem 1rem;
+    }
+
+    .avatar-wrap {
+      width: fit-content;
+      margin: 1.25rem auto 1.5rem;
+    }
+
+    .avatar {
+      display: block;
+      width: 8.5rem;
+      height: 8.5rem;
+      overflow: hidden;
+      border-radius: 9999px;
+      background: var(--base-100);
+      transition: transform 0.15s ease-in-out;
+    }
+
+    .avatar:hover {
+      transform: scale(1.02);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 34% center;
+    }
+
+    .profile-card {
+      margin: -0.35rem 0 1.25rem;
+      text-align: center;
+    }
+
+    .profile-name {
+      margin: 0;
+      font-size: 1.18rem;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    .profile-alias {
+      margin-top: 0.2rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.3;
+    }
+
+    .profile-location {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      margin-top: 0.65rem;
+      border: 1px solid var(--base-300);
+      border-radius: 999px;
+      background: var(--base-100);
+      padding: 0.25rem 0.65rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      line-height: 1rem;
+    }
+
+    .profile-links {
+      display: flex;
+      justify-content: center;
+      gap: 0.9rem;
+      margin-top: 0.8rem;
+    }
+
+    .profile-links a {
+      display: inline-flex;
+      width: 1.4rem;
+      height: 1.4rem;
+      align-items: center;
+      justify-content: center;
+      color: var(--base-content);
+      opacity: 0.78;
+      transition: color 0.18s ease, opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .profile-links a:hover,
+    .profile-links a:focus-visible {
+      color: var(--blue);
+      opacity: 1;
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .menu {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      overflow-y: auto;
+    }
+
+    .menu a {
+      display: flex;
+      align-items: center;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0.68rem 1rem;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      color: var(--base-content);
+      transition: background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    }
+
+    .menu a:hover,
+    .menu a:focus-visible,
+    .menu a.active {
+      border-color: rgba(231, 229, 228, 0.9);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 8px 18px rgba(41, 37, 36, 0.06);
+      color: var(--blue);
+      transform: translateX(2px);
+      outline: none;
+    }
+
+    .side-social {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.25rem 1rem 1.25rem;
+    }
+
+    .side-social a {
+      display: inline-flex;
+      width: 1.25rem;
+      height: 1.25rem;
+      align-items: center;
+      justify-content: center;
+      color: var(--base-content);
+      opacity: 0.84;
+    }
+
+    .side-social a:hover {
+      color: var(--blue);
+      opacity: 1;
+    }
+
+    main {
+      width: min(900px, 100%);
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    .intro {
+      margin-top: 1.25rem;
+      padding-bottom: 3rem;
+    }
+
+    h1 {
+      margin: 0 0 0.5rem;
+      background-image: linear-gradient(to right, var(--yellow-600), var(--red-600));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 60px;
+    }
+
+    .wave {
+      margin-left: 1rem;
+      width: 1.2em;
+      height: 1.2em;
+      font-size: 2.25rem;
+    }
+
+    .lead {
+      padding: 0.5rem 0;
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
+
+    .lead p {
+      margin: 0;
+    }
+
+    .open-note {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      align-items: center;
+      margin-top: 1rem;
+      border: 1px solid rgba(202, 138, 4, 0.22);
+      border-radius: var(--radius-box);
+      background: linear-gradient(135deg, #fffaf0, #fff);
+      padding: 0.8rem 1rem;
+      color: #42352a;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      box-shadow: var(--shadow);
+    }
+
+    b,
+    strong {
+      font-weight: 700;
+    }
+
+    .blue-link {
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    .blue-link:hover {
+      text-decoration: underline;
+    }
+
+    .intro-list {
+      margin: 0.5rem 0 0 2.5rem;
+      padding: 0;
+    }
+
+    .intro-list ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin: 0;
+      padding-left: 1.5rem;
+      list-style: disc;
+    }
+
+    .intro-list li {
+      padding-left: 0.15rem;
+    }
+
+    section {
+      margin-top: 4rem;
+    }
+
+    section:first-of-type {
+      margin-top: 0;
+    }
+
+    h2 {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0 0 1rem;
+      font-size: 1.875rem;
+      font-weight: 700;
+      line-height: 2.25rem;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.375;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.875rem;
+      line-height: 1.625;
+    }
+
+    .signature-panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--base-300);
+      border-radius: var(--radius-box);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(59, 130, 246, 0.16), transparent 30%),
+        radial-gradient(circle at 88% 0%, rgba(220, 38, 38, 0.12), transparent 26%),
+        linear-gradient(135deg, #ffffff 0%, #fbfaf8 100%);
+      padding: 1.1rem;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .signature-panel::after {
+      position: absolute;
+      right: -4rem;
+      bottom: -5rem;
+      width: 15rem;
+      height: 15rem;
+      border: 1px solid rgba(41, 37, 36, 0.08);
+      border-radius: 9999px;
+      content: "";
+    }
+
+    .signature-top {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.9fr);
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .signature-copy {
+      display: flex;
+      min-height: 14rem;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: var(--radius-box);
+      background: rgba(255, 255, 255, 0.74);
+      padding: 1.25rem;
+    }
+
+    .signature-kicker {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 0.35rem;
+      border: 1px solid rgba(59, 130, 246, 0.24);
+      border-radius: 999px;
+      background: var(--blue-soft);
+      padding: 0.25rem 0.65rem;
+      color: #1d4ed8;
+      font-size: 0.75rem;
+      font-weight: 700;
+      line-height: 1rem;
+    }
+
+    .signature-copy h3 {
+      margin-top: 0.95rem;
+      font-size: 1.45rem;
+      line-height: 1.18;
+    }
+
+    .signature-visual {
+      overflow: hidden;
+      border: 1px solid rgba(231, 229, 228, 0.8);
+      border-radius: var(--radius-box);
+      background: var(--base-100);
+      min-height: 14rem;
+    }
+
+    .signature-visual img {
+      width: 100%;
+      height: 100%;
+      min-height: 14rem;
+      object-fit: cover;
+    }
+
+    .research-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.85rem;
+    }
+
+    .research-chip {
+      position: relative;
+      display: block;
+      min-height: 8.2rem;
+      border: 1px solid rgba(231, 229, 228, 0.82);
+      border-radius: var(--radius-box);
+      background: rgba(255, 255, 255, 0.78);
+      padding: 0.9rem;
+      backdrop-filter: blur(12px);
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+    }
+
+    .research-chip:nth-child(2) {
+      background: linear-gradient(180deg, var(--amber-soft), rgba(255, 255, 255, 0.82));
+    }
+
+    .research-chip:nth-child(3) {
+      background: linear-gradient(180deg, var(--green-soft), rgba(255, 255, 255, 0.82));
+    }
+
+    .research-chip:nth-child(4) {
+      background: linear-gradient(180deg, var(--red-soft), rgba(255, 255, 255, 0.82));
+    }
+
+    .research-chip::after,
+    .experience-item::after,
+    .talk-item::after {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      color: rgba(41, 37, 36, 0.32);
+      content: "↗";
+      font-size: 0.8rem;
+      font-weight: 700;
+      line-height: 1;
+      transition: color 0.18s ease, transform 0.18s ease;
+    }
+
+    .research-chip:hover,
+    .research-chip:focus-visible {
+      border-color: rgba(59, 130, 246, 0.38);
+      box-shadow: 0 14px 30px rgba(41, 37, 36, 0.1);
+      transform: translateY(-3px);
+      outline: none;
+    }
+
+    .research-chip:hover::after,
+    .research-chip:focus-visible::after,
+    .experience-item:hover::after,
+    .experience-item:focus-visible::after,
+    .talk-item:hover::after,
+    .talk-item:focus-visible::after {
+      color: var(--blue);
+      transform: translate(2px, -2px);
+    }
+
+    .chip-emoji {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+
+    .experience-panel {
+      margin-top: 1.5rem;
+      border: 1px solid var(--base-300);
+      border-radius: var(--radius-box);
+      background: linear-gradient(135deg, #ffffff, #f7f7f7);
+      padding: 1rem;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .experience-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .experience-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      justify-content: flex-end;
+    }
+
+    .brand-logo {
+      display: flex;
+      width: 4.3rem;
+      height: 2.6rem;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid var(--base-300);
+      border-radius: var(--radius-box);
+      background: var(--base-100);
+      padding: 0.35rem;
+    }
+
+    .brand-logo.school {
+      background: #ffd326;
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .experience-track {
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .experience-item,
+    .talk-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 5rem minmax(0, 1fr);
+      gap: 0.75rem;
+      border-radius: var(--radius-box);
+      background: rgba(255, 255, 255, 0.74);
+      padding: 0.75rem;
+      border: 1px solid transparent;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+    }
+
+    .experience-item:hover,
+    .experience-item:focus-visible,
+    .talk-item:hover,
+    .talk-item:focus-visible {
+      border-color: rgba(59, 130, 246, 0.32);
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 12px 28px rgba(41, 37, 36, 0.08);
+      transform: translateX(4px);
+      outline: none;
+    }
+
+    .experience-year,
+    .talk-year {
+      color: var(--red-600);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+    }
+
+    .experience-stamp {
+      display: grid;
+      gap: 0.35rem;
+      align-content: start;
+      justify-items: start;
+    }
+
+    .experience-mini-logo {
+      display: flex;
+      width: 2.25rem;
+      height: 1.55rem;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid var(--base-300);
+      border-radius: var(--radius-btn);
+      background: var(--base-100);
+      padding: 0.18rem;
+      box-shadow: var(--shadow);
+    }
+
+    .experience-mini-logo.school {
+      background: #ffd326;
+    }
+
+    .experience-mini-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .talk-list {
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .logo-box {
+      display: flex;
+      width: 3.5rem;
+      min-width: 3.5rem;
+      height: 3.5rem;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: var(--radius-box);
+      background: var(--base-100);
+      box-shadow: 0 0 0 1px var(--ring), var(--shadow);
+      font-size: 1.75rem;
+    }
+
+    .logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .work-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .work-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 2rem;
+    }
+
+    .work-title a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .mini-card {
+      display: flex;
+      min-width: 0;
+      justify-content: space-between;
+      gap: 0.75rem;
+      border-radius: var(--radius-box);
+      padding: 0.25rem;
+    }
+
+    .mini-card:hover {
+      background: var(--base-200);
+    }
+
+    .mini-content {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pill-list li,
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--base-300);
+      border-radius: var(--radius-btn);
+      background: var(--base-100);
+      padding: 0.25rem 0.5rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+      line-height: 1rem;
+      white-space: nowrap;
+    }
+
+    .feature-card {
+      position: relative;
+      display: flex;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      border: 1px solid var(--base-300);
+      border-radius: var(--radius-box);
+      background: var(--base-100);
+      padding: 1rem;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .feature-card:hover {
+      background: var(--base-200);
+    }
+
+    .feature-media {
+      display: flex;
+      width: 5.5rem;
+      min-width: 5.5rem;
+      height: 4.5rem;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: var(--radius-box);
+      background: linear-gradient(135deg, var(--base-200), #ffffff);
+      color: rgba(41, 37, 36, 0.52);
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .feature-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .publication-media {
+      position: relative;
+      width: 8rem;
+      min-width: 8rem;
+      height: 5.75rem;
+      padding: 0;
+      background: var(--base-100);
+      color: inherit;
+      letter-spacing: 0;
+    }
+
+    .publication-media::after {
+      position: absolute;
+      right: 0.35rem;
+      bottom: 0.35rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
+      color: rgba(41, 37, 36, 0.7);
+      content: attr(data-label);
+      font-size: 0.68rem;
+      font-weight: 800;
+      line-height: 1;
+      padding: 0.24rem 0.36rem;
+      box-shadow: 0 1px 8px rgba(41, 37, 36, 0.1);
+    }
+
+    .feature-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .feature-body h2 {
+      margin: 0 0 0.35rem;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.375;
+    }
+
+    .feature-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      width: 1.65rem;
+      min-height: 1.65rem;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      padding: 0;
+      color: var(--base-content);
+      opacity: 0.78;
+      line-height: 1em;
+      transition: color 0.18s ease, opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      color: var(--blue);
+      opacity: 1;
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding: 2rem 0 1rem;
+      color: var(--muted);
+      font-size: 0.875rem;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .drawer-content {
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 4.5rem;
+        line-height: 86px;
+      }
+
+      .wave {
+        font-size: 3.75rem;
+      }
+    }
+
+    @media (min-width: 1024px) and (max-width: 1180px) {
+      .drawer {
+        grid-template-columns: 16rem minmax(0, 1fr);
+      }
+
+      .avatar {
+        width: 7rem;
+        height: 7rem;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      .drawer {
+        display: block;
+      }
+
+      .drawer-content,
+      .drawer-side {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
+      .mobile-bar {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        display: flex;
+        height: 4rem;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--base-content);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+        backdrop-filter: blur(16px);
+      }
+
+      .navbar {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        padding: 0 1rem;
+      }
+
+      .menu-button {
+        display: inline-flex;
+        width: 3rem;
+        height: 3rem;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        border-radius: var(--radius-btn);
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .mobile-brand {
+        border-radius: var(--radius-btn);
+        padding: 0.5rem 1rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+
+      .drawer-side {
+        position: fixed;
+        inset: 0 auto 0 0;
+        z-index: 40;
+        width: 20rem;
+        max-width: calc(100vw - 3rem);
+        transform: translateX(-100%);
+        transition: transform 0.2s ease;
+      }
+
+      .drawer-toggle:checked ~ .drawer-side {
+        transform: translateX(0);
+      }
+
+      .drawer-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 35;
+        display: none;
+        background: rgba(0, 0, 0, 0.4);
+      }
+
+      .drawer-toggle:checked ~ .drawer-overlay {
+        display: block;
+      }
+
+      .sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 700px) {
+      main {
+        max-width: 100vw;
+        padding: 2.5rem 1.5rem 4rem;
+      }
+
+      .intro {
+        margin-top: 1.25rem;
+      }
+
+      .intro-list {
+        margin-left: 1.25rem;
+      }
+
+      .item-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .signature-top,
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .experience-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .experience-logos {
+        justify-content: flex-start;
+      }
+
+      .experience-item {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card {
+        flex-direction: column;
+      }
+
+      .feature-media {
+        width: fit-content;
+        min-width: 4.5rem;
+        height: 3rem;
+        padding: 0 0.8rem;
+      }
+
+      .publication-media {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="drawer">
+    <input id="my-drawer" type="checkbox" class="drawer-toggle">
+
+    <div class="drawer-content">
+      <div class="mobile-bar">
+        <div class="navbar">
+          <label for="my-drawer" class="menu-button" aria-label="Open navigation menu">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </label>
+          <a class="mobile-brand" href="#top">🙋 Ruoqiao</a>
+          <span></span>
+        </div>
+      </div>
+
+      <main id="top">
+        <div class="intro">
+          <h1>
+            Hello, hello!
+            <svg class="wave" viewBox="0 0 36 36" aria-hidden="true">
+              <path fill="#EF9645" d="M4.861 9.147c.94-.657 2.357-.531 3.201.166l-.968-1.407c-.779-1.111-.5-2.313.612-3.093c1.112-.777 4.263 1.312 4.263 1.312c-.786-1.122-.639-2.544.483-3.331a2.483 2.483 0 0 1 3.456.611l10.42 14.72L25 31l-11.083-4.042L4.25 12.625a2.495 2.495 0 0 1 .611-3.478"></path>
+              <path fill="#FFDC5D" d="M2.695 17.336s-1.132-1.65.519-2.781c1.649-1.131 2.78.518 2.78.518l5.251 7.658c.181-.302.379-.6.6-.894L4.557 11.21s-1.131-1.649.519-2.78c1.649-1.131 2.78.518 2.78.518l6.855 9.997c.255-.208.516-.417.785-.622L7.549 6.732s-1.131-1.649.519-2.78c1.649-1.131 2.78.518 2.78.518l7.947 11.589c.292-.179.581-.334.871-.498L12.238 4.729s-1.131-1.649.518-2.78c1.649-1.131 2.78.518 2.78.518l7.854 11.454l1.194 1.742c-4.948 3.394-5.419 9.779-2.592 13.902c.565.825 1.39.26 1.39.26c-3.393-4.949-2.357-10.51 2.592-13.903L24.515 8.62s-.545-1.924 1.378-2.47c1.924-.545 2.47 1.379 2.47 1.379l1.685 5.004c.668 1.984 1.379 3.961 2.32 5.831c2.657 5.28 1.07 11.842-3.94 15.279c-5.465 3.747-12.936 2.354-16.684-3.11z"></path>
+              <g fill="#5DADEC">
+                <path d="M12 32.042C8 32.042 3.958 28 3.958 24c0-.553-.405-1-.958-1s-1.042.447-1.042 1C1.958 30 6 34.042 12 34.042c.553 0 1-.489 1-1.042s-.447-.958-1-.958"></path>
+                <path d="M7 34c-3 0-5-2-5-5a1 1 0 1 0-2 0c0 4 3 7 7 7a1 1 0 1 0 0-2M24 2a1 1 0 0 0 0 2c4 0 8 3.589 8 8a1 1 0 0 0 2 0c0-5.514-4-10-10-10"></path>
+                <path d="M29 .042c-.552 0-1 .406-1 .958s.448 1.042 1 1.042c3 0 4.958 2.225 4.958 4.958c0 .552.489 1 1.042 1s.958-.448.958-1C35.958 3.163 33 .042 29 .042"></path>
+              </g>
+            </svg>
+          </h1>
+
+          <div class="lead">
+            <p>
+              I'm <b>Ruoqiao Wang</b>, (also called <b>Rachel</b>), a Ph.D. candidate in Biomedical Genetics (Bioinformatics Track)
+              at the <a class="blue-link" href="https://www.urmc.rochester.edu/labs/thakar" target="_blank" rel="noopener noreferrer">Thakar Lab</a>,
+              University of Rochester Medical Center, where I work at the intersection of computational biology, immunology, and AI/ML.
+            </p>
+          </div>
+
+          <div class="intro-list">
+            <ul class="bio-list">
+              <li>🧬 Developing statistical and AL/ML methods for large-scale multi-omics data.</li>
+              <li>🧠 Modeling immune cell states, gene regulatory networks, and in silico perturbation responses.</li>
+              <li>🤖 Interested in full-time roles at the intersection of immunology, AI/ML.</li>
+              <li>📍 Based in Boston, MA. CV available upon request.</li>
+            </ul>
+                      </div>
+          <p class="open-note">
+            Always open to interesting collaborations, new science friends, and yes, very warmly welcoming job referrals 👏
+          </p>
+        </div>
+
+        <section id="research">
+          <h2>Research 🧬</h2>
+
+          <div class="signature-panel">
+            <div class="signature-top">
+              <div class="signature-copy">
+                <div>
+                  <span class="signature-kicker">AI × Immunology × Single-cell</span>
+                  <h3>Turning noisy immune data into testable biological stories.</h3>
+                </div>
+                <p class="muted">
+                  I build models that connect cell states, pathway activity, regulatory logic, and disease-specific perturbations.
+                  The fun part: making large-scale omics data say something mechanistic, not just colorful.
+                </p>
+              </div>
+            </div>
+
+            <div class="research-grid">
+              <a class="research-chip" href="#publications" aria-label="Jump to publications related to immune digital twins">
+                <span class="chip-emoji">🧫</span>
+                <h3>Immune Digital Twins</h3>
+                <p class="muted">Virtual patient simulation and in silico perturbation frameworks for coordinated monocyte immune programs.</p>
+              </a>
+              <a class="research-chip" href="#publications" aria-label="Jump to publications related to gene regulatory networks">
+                <span class="chip-emoji">🕸️</span>
+                <h3>Gene Regulatory Networks</h3>
+                <p class="muted">Condition-specific regulatory rewiring using prior knowledge, foundation models, and graph attention networks.</p>
+              </a>
+              <a class="research-chip" href="#publications" aria-label="Jump to publications related to single-cell pathway scoring">
+                <span class="chip-emoji">📈</span>
+                <h3>Single-Cell Pathway Scoring</h3>
+                <p class="muted">Benchmarking and method development for pathway activity scoring at single-cell resolution.</p>
+              </a>
+              <a class="research-chip" href="#skills" aria-label="Jump to skills related to multi-omics integration">
+                <span class="chip-emoji">🧩</span>
+                <h3>Multi-omics Integration</h3>
+                <p class="muted">scRNA-seq, CITE-seq, BCR-seq, scATAC-seq, spatial transcriptomics, and proteomics.</p>
+              </a>
+            </div>
+          </div>
+
+          <div class="experience-panel" id="experience">
+            <div class="experience-head">
+              <div>
+                <h2>Experience 🚀</h2>
+                <p class="muted">A few places and projects shaping how I think about translational computation.</p>
+              </div>
+              <div class="experience-logos">
+                <span class="brand-logo school"><img src="assets/ur.jpeg" alt="University of Rochester logo"></span>
+                <span class="brand-logo"><img src="assets/lilly.webp" alt="Lilly logo"></span>
+              </div>
+            </div>
+
+            <div class="experience-track">
+              <a class="experience-item" href="https://www.lilly.com/" target="_blank" rel="noopener noreferrer" aria-label="Open Lilly website">
+                <div class="experience-stamp">
+                  <span class="experience-mini-logo"><img src="assets/lilly.webp" alt="Lilly logo"></span>
+                  <span class="experience-year">2026</span>
+                </div>
+                <div>
+                  <h3>Lilly Talent Development Academy Intern</h3>
+                  <p class="muted">Eli Lilly and Company, Boston, MA.</p>
+                </div>
+              </a>
+              <a class="experience-item" href="https://www.urmc.rochester.edu/labs/thakar" target="_blank" rel="noopener noreferrer" aria-label="Open Thakar Lab website">
+                <div class="experience-stamp">
+                  <span class="experience-mini-logo school"><img src="assets/ur.jpeg" alt="University of Rochester logo"></span>
+                  <span class="experience-year">2025-Present</span>
+                </div>
+                <div>
+                  <h3>Gene Regulatory Network Dynamics from Single-Cell Data</h3>
+                  <p class="muted">Research Assistant with Dr. Juilee Thakar, integrating prior knowledge networks, foundation models, and single-cell data.</p>
+                </div>
+              </a>
+              <a class="experience-item" href="#publications" aria-label="Jump to rheumatoid arthritis publication">
+                <div class="experience-stamp">
+                  <span class="experience-mini-logo school"><img src="assets/ur.jpeg" alt="University of Rochester logo"></span>
+                  <span class="experience-year">2023-Present</span>
+                </div>
+                <div>
+                  <h3>B Cell Mechanisms in Rheumatoid Arthritis</h3>
+                  <p class="muted">Research Assistant with Dr. Jennifer Anolik and Dr. Juilee Thakar, studying clonal relationships and Tph-B cell interactions in synovium.</p>
+                </div>
+              </a>
+              <a class="experience-item" href="#publications" aria-label="Jump to monocyte dysfunction publication">
+                <div class="experience-stamp">
+                  <span class="experience-mini-logo school"><img src="assets/ur.jpeg" alt="University of Rochester logo"></span>
+                  <span class="experience-year">2022-2025</span>
+                </div>
+                <div>
+                  <h3>Monocyte Dysfunction in HIV-Associated Atherosclerosis</h3>
+                  <p class="muted">Research Assistant with Dr. Meera Singh and Dr. Juilee Thakar, characterization of monocytes in HIV-associated atherosclerosis..</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section id="publications">
+          <h2>Selected Publications 📚</h2>
+
+          <article class="feature-card">
+            <div class="feature-media publication-media" data-label="01">
+              <img src="assets/scPS.png" alt="Visual summary for comparative analysis of single-cell pathway scoring methods">
+            </div>
+            <div class="feature-body">
+              <h2>Comparative analysis of single-cell pathway scoring methods and a novel approach.</h2>
+              <p class="muted">Wang RH, Thakar J. <em>NAR Genomics and Bioinformatics</em> 6.3 (2024): lqae124.</p>
+              <div class="feature-meta">
+                <a class="badge" href="https://github.com/Thakar-Lab/scPS" target="_blank" rel="noopener noreferrer">Code</a>
+                <span class="badge">First author</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-media publication-media" data-label="02">
+              <img src="assets/PMC.png" alt="Visual summary for platelet-monocyte complexes in HIV-associated atherosclerosis">
+            </div>
+            <div class="feature-body">
+              <h2>Single-Cell Profiling of Circulating Monocytes Reveals Novel Platelet-Monocyte Complexes in HIV-Associated Atherosclerosis.</h2>
+              <p class="muted">Wang RH, Boodoo ZD et al. <em>Journal of the American Heart Association</em>, 15(6), e046482.</p>
+              <div class="feature-meta">
+                <a class="badge" href="https://github.com/Thakar-Lab/PMCs" target="_blank" rel="noopener noreferrer">Code</a>
+                <span class="badge">Co-First</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-media publication-media" data-label="03">
+              <img src="assets/RA.png" alt="Visual summary for clonal associations in rheumatoid arthritis synovium">
+            </div>
+            <div class="feature-body">
+              <h2>Clonal associations between lymphocyte subsets and functional states in rheumatoid arthritis synovium.</h2>
+              <p class="muted">Dunlap G, Wagner A, Meednu N, Wang RH et al. <em>Nature Communications</em> 15.1 (2024): 4991.</p>
+              <div class="feature-meta">
+                <a class="badge" href="https://github.com/dunlapg/amp2repertoire" target="_blank" rel="noopener noreferrer">Code</a>
+                <span class="badge">Collaborative work</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-media publication-media" data-label="04">
+              <img src="assets/piRNA.png" alt="Visual summary for ribosome-guided piRNA processing on mRNAs">
+            </div>
+            <div class="feature-body">
+              <h2>Coupled protein synthesis and ribosome-guided piRNA processing on mRNAs.</h2>
+              <p class="muted">Sun YH, Wang RH et al. <em>Nature Communications</em> 12.1 (2021): 5970.</p>
+              <div class="feature-meta">
+                <span class="badge">Collaborative work</span>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section id="talks">
+          <h2>Selected Talks & Posters 🎤</h2>
+
+          <div class="talk-list">
+            <a class="talk-item" href="https://docs.google.com/presentation/d/1_Xh9Ywwq8sWITfjbFsO6L8Rgb1z93_1w/edit?usp=sharing&amp;ouid=113676108070316024524&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">
+              <div class="talk-year">2026</div>
+              <div>
+                <h3>Harnessing Single-cell RNA-seq Data for Digital Twins</h3>
+                <p class="muted">Festival of Genomics, Biodata & AI, Boston, MA.</p>
+              </div>
+            </a>
+
+            <a class="talk-item" href="https://docs.google.com/presentation/d/1o0CdTUSKgU5uZpzJnDgRrJtEUpgI9dzv/edit?usp=sharing&amp;ouid=113676108070316024524&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">
+              <div class="talk-year">2026</div>
+              <div>
+                <h3>Modeling Condition-Specific Gene Regulatory Rewiring using Graph Attention Network</h3>
+                <p class="muted">Women in Bioinformatics Workshop, Ithaca, NY.</p>
+              </div>
+            </a>
+
+            <a class="talk-item" href="https://drive.google.com/file/d/1ZTyp7uE14xX9ALqBpSBP9lLLqBKcv938/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+              <div class="talk-year">2025</div>
+              <div>
+                <h3>Monocytes Defined by Platelet Interactions & Oxidative Stress Signaling</h3>
+                <p class="muted">Federation of Clinical Immunology Societies, Boston, MA.</p>
+              </div>
+            </a>
+
+            <a class="talk-item" href="https://drive.google.com/file/d/1oDe8bXn2Za5LlRHBbGVuMWng7iRNb7x3/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+              <div class="talk-year">2024</div>
+              <div>
+                <h3>Comparative Analysis of Single-Cell Pathway Scoring Methods and scPS</h3>
+                <p class="muted">CSHL Systems Immunology, Cold Spring Harbor, NY.</p>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <section id="skills">
+          <h2>Skills 🎨</h2>
+          <ul class="pill-list">
+            <li>R</li>
+            <li>Python</li>
+            <li>Bash</li>
+            <li>PyTorch</li>
+            <li>Neo4j / Cypher</li>
+            <li>AWS</li>
+            <li>HPC</li>
+            <li>GitHub</li>
+            <li>LaTeX</li>
+            <li>scRNA-seq</li>
+            <li>CITE-seq</li>
+            <li>BCR-seq</li>
+            <li>scATAC-seq</li>
+            <li>Spatial transcriptomics</li>
+            <li>Proteomics</li>
+          </ul>
+        </section>
+
+        <section id="contact">
+          <h2>Contact ✉️</h2>
+          <p class="muted">Always open to interesting collaborations, connecting with new friends, and very happy to receive job referrals 👏</p>
+          <div class="contact">
+            <a href="https://github.com/RuoqiaoWrqqq" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.4-4-1.4c-.5-1.3-1.3-1.7-1.3-1.7c-1.1-.7.1-.7.1-.7c1.2.1 1.8 1.2 1.8 1.2c1.1 1.8 2.8 1.3 3.5 1c.1-.8.4-1.3.8-1.6c-2.6-.3-5.4-1.3-5.4-5.9c0-1.3.5-2.4 1.2-3.2c-.1-.3-.5-1.5.1-3.2c0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2c.6 1.7.2 2.9.1 3.2c.8.8 1.2 1.9 1.2 3.2c0 4.6-2.8 5.6-5.4 5.9c.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"></path></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/ruoqiao-wang-5571741b4/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04c-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85c3.61 0 4.28 2.38 4.28 5.47v6.27zM5.32 7.43a2.06 2.06 0 1 1 0-4.12a2.06 2.06 0 0 1 0 4.12zM7.1 20.45H3.53V9H7.1v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.23 0z"></path></svg>
+            </a>
+            
+            <a href="https://scholar.google.com/citations?user=JkvsmA4AAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar" title="Google Scholar">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 3L1.5 8.25L12 13.5l8-4v5.25h2V8.25L12 3zm-6 9.1v3.15c0 2.05 3.58 3.75 6 3.75s6-1.7 6-3.75V12.1l-6 3l-6-3z"></path></svg>
+            </a>
+            
+            <a href="mailto:Ruoqiao_Wang@urmc.rochester.edu" aria-label="Email" title="Email">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm-.4 4.25l-7.07 5.3a.9.9 0 0 1-1.06 0L4.4 8.25V6.8l7.6 5.7l7.6-5.7v1.45z"></path></svg>
+            </a>
+
+          </div>
+        </section>
+
+        <footer>© 2026 Ruoqiao Wang</footer>
+      </main>
+    </div>
+
+    <label for="my-drawer" class="drawer-overlay" aria-label="Close navigation menu"></label>
+
+    <aside class="drawer-side">
+      <div class="sidebar">
+        <div class="avatar-wrap">
+          <a class="avatar" href="#top" aria-label="Back to top">
+            <img src="assets/research-hero.png" alt="Computational immunology visual">
+          </a>
+        </div>
+
+        <div class="profile-card" aria-label="Profile summary">
+          <p class="profile-name">Ruoqiao (Rachel)</p>
+          <p class="profile-name">Wang</p>
+          <p class="profile-alias"> Computational Biology</p>
+          <div class="profile-location">📍 Boston, MA</div>
+          <div class="profile-links">
+            <a href="https://github.com/RuoqiaoWrqqq" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.3.8-.6v-2.1c-3.3.7-4-1.4-4-1.4c-.5-1.3-1.3-1.7-1.3-1.7c-1.1-.7.1-.7.1-.7c1.2.1 1.8 1.2 1.8 1.2c1.1 1.8 2.8 1.3 3.5 1c.1-.8.4-1.3.8-1.6c-2.6-.3-5.4-1.3-5.4-5.9c0-1.3.5-2.4 1.2-3.2c-.1-.3-.5-1.5.1-3.2c0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2c.6 1.7.2 2.9.1 3.2c.8.8 1.2 1.9 1.2 3.2c0 4.6-2.8 5.6-5.4 5.9c.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"></path></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/ruoqiao-wang-5571741b4/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04c-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85c3.61 0 4.28 2.38 4.28 5.47v6.27zM5.32 7.43a2.06 2.06 0 1 1 0-4.12a2.06 2.06 0 0 1 0 4.12zM7.1 20.45H3.53V9H7.1v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.23 0z"></path></svg>
+            </a>
+            
+            <a href="https://scholar.google.com/citations?user=JkvsmA4AAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar" title="Google Scholar">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 3L1.5 8.25L12 13.5l8-4v5.25h2V8.25L12 3zm-6 9.1v3.15c0 2.05 3.58 3.75 6 3.75s6-1.7 6-3.75V12.1l-6 3l-6-3z"></path></svg>
+            </a>
+            
+            <a href="mailto:Ruoqiao_Wang@urmc.rochester.edu" aria-label="Email" title="Email">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm-.4 4.25l-7.07 5.3a.9.9 0 0 1-1.06 0L4.4 8.25V6.8l7.6 5.7l7.6-5.7v1.45z"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <ul class="menu">
+          <li><a class="active" href="#top">Home</a></li>
+          <li><a href="#research">Research</a></li>
+           <li><a href="#experience">Experience</a></li>
+          <li><a href="#publications">Selected Publications</a></li>
+          <li><a href="#talks">Selected Talks & Posters</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>

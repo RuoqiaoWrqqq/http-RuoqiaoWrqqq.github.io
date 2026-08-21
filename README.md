@@ -1,4 +1,4 @@
-Ph.D. Candidate in Biomedical Genetics (Bioinformatics Track)
+Ph.D. Candidate in Biomedical Genetics (Bioinformatics Track)/h
 University of Rochester Medical Center
 Working at the intersection of computational biology, immunology & AI/ML
 Developing computational methods for single-cell & multi-omics data
